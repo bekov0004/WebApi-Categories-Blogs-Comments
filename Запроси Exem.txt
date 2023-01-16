@@ -1,0 +1,38 @@
+create table Categories
+(
+	Id serial PRIMARY KEY,
+	Title varchar(100)
+);
+CREATE TABLE Blogs
+(
+	Id Serial PRIMARY KEY,
+	Title VARCHAR(200) not null,
+	Image VARCHAR(50) not null,
+	CreateDate DATE NOT NULL,
+	UserId int not null,
+	CategoryId INTEGER NOT NUll REFERENCES Categories(Id) ON DELETE CASCADE,
+	Content text not null
+);
+create TABLE Comments
+(
+	Id Serial PRIMARY KEY,
+    CretedBy VARCHAR(100) not null,
+	CretedAt DATE NOT NULL,
+	Message varchar(500) not null,
+	Email Varchar(100) not null,
+	ReplyId int null REFERENCES Comments(Id) ON  DELETE CASCADE,
+	BlogId int not null
+);
+insert into Categories(Id,Title)
+values
+(1,'Food blogs'),
+(2,'Travel blogs'),
+(3,'Health and fitness blogs'),
+(4,'Fashion and beauty blogs'),
+(5,'Personal blogs')
+
+insert into Blogs(Id,Title,Image,CreateDate,UserId,CategoryId,Content)
+values(1,'Love and Lemons','loveandlemons.img','2023-01-14',5,1,'Love and Lemons has been created by Jeanine Donofrio and her husband, Jack Mathews (“#1 taste-tester”). The blog’s name comes from the fact that Jeanine loves seasonal food, often finished off with a squeeze of lemon.')
+
+insert into Comments(Id,CretedBy,CretedAt,Message,Email,ReplyId,BlogId)
+values(1,'Ardasher','2023-01-14','Good','ardasher@gmail.com',1,1)
